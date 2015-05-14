@@ -492,13 +492,40 @@ int finalizaTabela(table *t){
 // INSERE NA TABELA
 column *insereValor(column *c, char *nomeCampo, char *valorCampo){
     
+    int tamNome, tamValor, i;
+    tamNome = strlen(nomeCampo);
+    tamValor = strlen(valorCampo);
     column *aux;
+
     if(c == NULL){ // Se o valor a ser inserido é o primeiro, adiciona primeiro campo.
     
         column *e = (column *)malloc(sizeof(column)*1);
-        e->valorCampo = (char *)malloc(sizeof(char) * (sizeof(valorCampo)));
-        strcpy(e->nomeCampo, nomeCampo); 
-        strcpy(e->valorCampo, valorCampo);
+
+        if(e == NULL) {
+            printf("Memoria insuficiente!!\nAbortando...");
+            exit(1);
+        }
+
+        e->valorCampo = (char *)malloc((sizeof(valorCampo)));
+
+        if(e->valorCampo == NULL) {
+            printf("Memoria insuficiente!!\nAbortando...");
+            exit(1);
+        }
+    
+    //-----------------------------------Codigo de macho-------------------------------------------
+        for(i=0; i < tamNome && i < (TAMANHO_NOME_CAMPO-1); i++) e->nomeCampo[i] = nomeCampo[i];        
+        e->nomeCampo[i] = '\0';
+
+        for(i=0; i < tamValor; i++) e->valorCampo[i] = valorCampo[i];        
+        e->valorCampo[i] = '\0';
+
+    //---------------------------------------------------------------------------------------------
+
+    //----------------------Viadagem-----------------
+        //strcpy(e->nomeCampo, nomeCampo); 
+        //strcpy(e->valorCampo, valorCampo);
+    //-----------------------------------------------
         e->next = NULL;
         c = e;
         return c;
@@ -506,10 +533,33 @@ column *insereValor(column *c, char *nomeCampo, char *valorCampo){
         for(aux = c; aux != NULL; aux = aux->next) { // Anda até o final da lista de valores a serem inseridos e adiciona um novo valor.
             if(aux->next == NULL){
                 column *e = (column *)malloc(sizeof(column)*1);
+
+                if(e == NULL) {
+                    printf("Memoria insuficiente!!\nAbortando...");
+                    exit(1);
+                }
+
                 e->valorCampo = (char *)malloc(sizeof(char) * (sizeof(valorCampo)));
+
+                if(e->valorCampo == NULL) {
+                    printf("Memoria insuficiente!!\nAbortando...");
+                    exit(1);
+                }
+
                 e->next = NULL;
-                strcpy(e->nomeCampo, nomeCampo);
-                strcpy(e->valorCampo, valorCampo);
+            
+            //----------------------------mais codigo de macho-------------------------------------------
+                for(i=0; i < tamNome && i < (TAMANHO_NOME_CAMPO-1); i++) e->nomeCampo[i] = nomeCampo[i];
+                e->nomeCampo[i] = '\0';
+
+                for(i=0; i < tamValor; i++) e->valorCampo[i] = valorCampo[i];
+                e->valorCampo[i] = '\0';
+            //-------------------------------------------------------------------------------------------
+
+            //------------------------coisa de viado-----------------
+                //strcpy(e->nomeCampo, nomeCampo);
+                //strcpy(e->valorCampo, valorCampo);
+            //-------------------------------------------------------
                 aux->next = e;
                 return c;
             }
@@ -595,8 +645,17 @@ int finalizaInsert(char *nome, column *c){
                 return ERRO_NOME_CAMPO;
             }
             char valorCampo[auxT[t].tam];
-            strcpy(valorCampo, auxC->valorCampo);
-            strcat(valorCampo, "\0");
+        //----------------------------------Codigo de macho-----------------------------------------
+            int tamValor, i;
+            tamValor = strlen(auxC->valorCampo);
+            for(i=0; i < tamValor && i < (auxT[t].tam-1); i++) valorCampo[i] = auxC->valorCampo[i];
+            valorCampo[i] = '\0';
+        //------------------------------------------------------------------------------------------
+        
+        //-------------------------------Viadagem-----------------------------
+            //strcpy(valorCampo, auxC->valorCampo);
+            //strcat(valorCampo, "\0");
+        //--------------------------------------------------------------------
             fwrite(&valorCampo,sizeof(valorCampo),1,dados);
         }
         else if(auxT[t].tipo == 'I'){ // Grava um dado do tipo inteiro.
@@ -753,14 +812,16 @@ void imprime(char nomeTabela[]) {
          printf("Erro GRAVE ao abrir a TABELA.\nAbortando...\n");
         exit(1);
     }
-    
+    //int k;
     // PARA IMPRIMIR PÁGINA
     printf("Número de tuplas: %d\n", bufferpoll[0].nrec);
     for(j=0; j < objeto.qtdCampos*bufferpoll[0].nrec; j++){
         
-        if(pagina[j].tipoCampo == 'S')
+        if(pagina[j].tipoCampo == 'S') {
+            //for(k=0; pagina[j].valorCampo[k] != '\0'; k++) printf("%c", pagina[j].valorCampo[k]);
+            //printf("       ");
             printf("%s: %-15s ", pagina[j].nomeCampo,pagina[j].valorCampo);
-        else if(pagina[j].tipoCampo == 'I'){
+        } else if(pagina[j].tipoCampo == 'I'){
             int *n = (int *)&pagina[j].valorCampo[0];
             printf("%s: %-15d ",pagina[j].nomeCampo, *n);
         }
@@ -1219,6 +1280,7 @@ int verificaChavePK(char *nomeTabela, column *c, char *nomeCampo, char *valorCam
                 int *n = (int *)&pagina[j].valorCampo[0];
 
                 if(*n == atoi(valorCampo)){
+                    printf("%d\n", *n);
                     return ERRO_CHAVE_PRIMARIA;
                 }
             }
