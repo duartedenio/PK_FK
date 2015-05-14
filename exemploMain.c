@@ -72,21 +72,21 @@ int main(){
     colunas = insereValor(colunas, "CodInst", "111");
     colunas = insereValor(colunas, "Nome", "UFFS");
     colunas = insereValor(colunas, "Endereco", "RuadeTerra");
-    colunas = insereValor(colunas, "Reitor", "MandaChuva");
+    colunas = insereValor(colunas, "Reitor", "MandaChuvaaaaaa");
     finalizaInsert("Inst", colunas);
     
     colunas = NULL;
     colunas = insereValor(colunas, "CodInst", "222");
     colunas = insereValor(colunas, "Nome", "CEFET");
     colunas = insereValor(colunas, "Endereco", "RuadePedra");
-    colunas = insereValor(colunas, "Reitor", "MandaVento");
+    colunas = insereValor(colunas, "Reitor", "MandaVentoaaaa");
     finalizaInsert("Inst", colunas);
 
     colunas = NULL;
     colunas = insereValor(colunas, "CodInst", "333");
     colunas = insereValor(colunas, "Nome", "UNOESC");
     colunas = insereValor(colunas, "Endereco", "RuadeAsfal");
-    colunas = insereValor(colunas, "Reitor", "MandaAgua");
+    colunas = insereValor(colunas, "Reitor", "MandaAguaaa");
     finalizaInsert("Inst", colunas);
     
     
@@ -96,7 +96,7 @@ int main(){
     colunas = insereValor(colunas, "CodMat", "1401");
     colunas = insereValor(colunas, "CPF", "123456");
     colunas = insereValor(colunas, "CodInst", "333");
-    colunas = insereValor(colunas, "Curso", "CC");
+    colunas = insereValor(colunas, "Curso", "CCCCCCCCCCC");
     finalizaInsert("Inscri", colunas);
     
     colunas = NULL;
@@ -114,6 +114,7 @@ int main(){
     finalizaInsert("Inscri", colunas);
     
     imprime("Aluno");        //Imprime os atributos da tabela "Aluno"
+    excluirTabela("Aluno");
     imprime("Inst");
     excluirTabela("Inst");   //Exclui os dados da tabela do dicionario e remove-a do disco
     imprime("Inscri");
