@@ -51,14 +51,14 @@ int verificaChaveFK(char *nomeTabela,column *c, char *nomeCampo, char *valorCamp
                 }
             }
 
-            else if(pagina[j].tipoCampo == 'I'){ 
+            else if(pagina[j].tipoCampo == 'I'){
                 int *n = (int *)&pagina[j].valorCampo[0];
                 if(*n == atoi(valorCampo)){
                     return SUCCESS;
                 }
             }
 
-            else if(pagina[j].tipoCampo == 'D'){ 
+            else if(pagina[j].tipoCampo == 'D'){
                 double *nn = (double *)&pagina[j].valorCampo[0];
 
                 if(*nn == atof(valorCampo)){
@@ -66,14 +66,14 @@ int verificaChaveFK(char *nomeTabela,column *c, char *nomeCampo, char *valorCamp
                 }
             }
 
-            else if(pagina[j].tipoCampo == 'C'){                        
+            else if(pagina[j].tipoCampo == 'C'){
                 if(pagina[j].valorCampo == valorCampo){
                     return SUCCESS;
                 }
             }else {
                 return ERRO_CHAVE_ESTRANGEIRA;
             }
-        }            
+        }
     }
 
     return ERRO_CHAVE_ESTRANGEIRA;
