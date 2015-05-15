@@ -4,8 +4,8 @@
 column *insereValor(column *c, char *nomeCampo, char *valorCampo){
     
     int tamNome, tamValor, i;
-    tamNome = strlen(nomeCampo);
-    tamValor = strlen(valorCampo);
+    tamNome = strlen(nomeCampo)+1;
+    tamValor = strlen(valorCampo)+1;
     column *aux;
 
     if(c == NULL){ // Se o valor a ser inserido é o primeiro, adiciona primeiro campo.
