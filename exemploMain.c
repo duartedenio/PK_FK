@@ -24,7 +24,7 @@ int main(){
             tab[0] = adicionaCampo(tab[0], "Peso"    , 'D', (sizeof(double)),NPK,"","");
             finalizaTabela(tab[0]);
          }
-         if(!nTabela[1]){
+         if(!nTabela[1]){   
             tab[1] = iniciaTabela("Inst"); 
             tab[1] = adicionaCampo(tab[1], "CodInst"  , 'I', (sizeof(int))   ,PK , "","");
             tab[1] = adicionaCampo(tab[1], "Nome"     , 'S', 20              ,NPK, "","");
@@ -96,7 +96,7 @@ int main(){
     colunas = insereValor(colunas, "CodMat", "1401");
     colunas = insereValor(colunas, "CPF", "123456");
     colunas = insereValor(colunas, "CodInst", "333");
-    colunas = insereValor(colunas, "Curso", "CCCCCCCCCCC");
+    colunas = insereValor(colunas, "Curso", "CCCCCCCCCCCC");
     finalizaInsert("Inscri", colunas);
     
     colunas = NULL;

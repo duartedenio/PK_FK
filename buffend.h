@@ -23,7 +23,7 @@ typedef struct tp_table{ // Estrutura usada para carregar fs_schema.dat
 	int tam;						// Tamanho do Campo.                  4bytes
 	int chave;						// Tipo da chave                      4bytes
 	char tabelaApt[TAMANHO_NOME_TABELA]; //Nome da Tabela Apontada        20bytes 
-	char attApt[TAMANHO_NOME_CAMPO];	 //Nome do Atributo Apontado       40bytes
+	char attApt[TAMANHO_NOME_CAMPO];	//Nome do Atributo Apontado       40bytes
 	struct tp_table *next;			// Encadeamento para o próximo campo.
 }tp_table;
 
@@ -366,15 +366,3 @@ tp_table *abreTabela(char *nomeTabela, struct fs_objects *objeto, tp_table **tab
     Parametros: Nome da Tabela, Objeto da Tabela e tabela.
     Retorno:    tp_table
    ---------------------------------------------------------------------------------------------*/
-
-void cria_campo(int tam, int header, char *val, int x);
-int drawline(tp_buffer *buffpoll, tp_table *s, struct fs_objects objeto, int p, int num_page);
-int cabecalho(tp_table *s, int num_reg);
-int pot10(int n);
-double convertD(char u[]);
-double get_inteiro(char v[]);
-double get_decimal(char u[]);
-int convertI(char u[]);
-int strtam(char n[]);
-char *getTupla(tp_table *campos,struct fs_objects objeto, int from);
-void setTupla(tp_buffer *buffer,char *tupla, int tam, int pos);
