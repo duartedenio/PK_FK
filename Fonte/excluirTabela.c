@@ -40,6 +40,7 @@ int excluirTabela(char *nomeTabela) {
     while(fgetc (dicionario) != EOF){
         fseek(dicionario, -1, 1);
 
+        //coloca o nome de todas as tabelas em tupla
         fread(tupla[k], sizeof(char), TAMANHO_NOME_TABELA , dicionario);
         k++;
 
@@ -50,8 +51,8 @@ int excluirTabela(char *nomeTabela) {
     
     for(i = 0; i < objeto.qtdCampos; i++){
         if(tab2[i].chave == PK){
-            for(j=0; j<qtTable; j++) {
-            	if(strcmp(tupla[j], nomeTabela) != 0) {
+            for(j=0; j<qtTable; j++) {						//se tiver chave primaria verifica se ela e chave
+            	if(strcmp(tupla[j], nomeTabela) != 0) {		//estrangeira em outra tabela
 
             		abreTabela(tupla[j], &objeto1, &esquema1);
 
@@ -59,10 +60,10 @@ int excluirTabela(char *nomeTabela) {
 				    tab3 = procuraAtributoFK(objeto1);
 
 				    for(l=0; l<objeto1.qtdCampos; l++) {
-				    	if(tab3[l].chave == FK) {
-				    		if(strcmp(nomeTabela, tab3[l].tabelaApt) == 0) {
-				    			printf("Exclusao nao permitida!\n");
-				    			return ERRO_CHAVE_ESTRANGEIRA;
+				    	if(tab3[l].chave == FK) {								//verifica se a outra tabela possui
+				    		if(strcmp(nomeTabela, tab3[l].tabelaApt) == 0) {	//chave estrangeira
+				    			printf("Exclusao nao permitida!\n");			//se sim, verifica se e da tabela
+				    			return ERRO_CHAVE_ESTRANGEIRA;					//anterior
 				    		}
 				    	}
 				    }
