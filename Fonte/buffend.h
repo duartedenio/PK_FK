@@ -23,7 +23,7 @@ typedef struct tp_table{ // Estrutura usada para carregar fs_schema.dat
 	int tam;						// Tamanho do Campo.                  4bytes
 	int chave;						// Tipo da chave                      4bytes
 	char tabelaApt[TAMANHO_NOME_TABELA]; //Nome da Tabela Apontada        20bytes 
-	char attApt[TAMANHO_NOME_CAMPO];	//Nome do Atributo Apontado       40bytes
+	char attApt[TAMANHO_NOME_CAMPO];	 //Nome do Atributo Apontado       40bytes
 	struct tp_table *next;			// Encadeamento para o próximo campo.
 }tp_table;
 
