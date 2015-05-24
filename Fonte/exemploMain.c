@@ -24,7 +24,7 @@ int main(){
             tab[0] = adicionaCampo(tab[0], "Peso"    , 'D', (sizeof(double)),NPK,"","");
             finalizaTabela(tab[0]);
          }
-         if(!nTabela[1]){   
+         if(!nTabela[1]){
             tab[1] = iniciaTabela("Inst"); 
             tab[1] = adicionaCampo(tab[1], "CodInst"  , 'I', (sizeof(int))   ,PK , "","");
             tab[1] = adicionaCampo(tab[1], "Nome"     , 'S', 20              ,NPK, "","");
