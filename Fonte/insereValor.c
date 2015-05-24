@@ -17,7 +17,7 @@ column *insereValor(column *c, char *nomeCampo, char *valorCampo){
             exit(1);
         }
 
-        e->valorCampo = (char *)malloc((sizeof(valorCampo)));
+        e->valorCampo = (char *)malloc(tamValor);
 
         if(e->valorCampo == NULL) {
             printf("Memoria insuficiente!!\nAbortando...");
