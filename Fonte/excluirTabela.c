@@ -29,7 +29,7 @@ int excluirTabela(char *nomeTabela) {
     }
 
     tp_table *tab2 = (tp_table *)malloc(sizeof(struct tp_table));
-    tab2 = procuraAtributoFK(objeto);
+    tab2 = procuraAtributoFK(objeto);	//retorna o tipo de chave que e cada campo
 
     FILE *dicionario;
 
@@ -47,37 +47,16 @@ int excluirTabela(char *nomeTabela) {
     }
 
     fclose(dicionario);
-
-    /*for(i=0; i<qtTable; i++) {
-    	printf(">>>>>>>>>>>>>>>>>>>>>>>>%s\n", tupla[i]);
-    }*/
     
     for(i = 0; i < objeto.qtdCampos; i++){
         if(tab2[i].chave == PK){
             for(j=0; j<qtTable; j++) {
             	if(strcmp(tupla[j], nomeTabela) != 0) {
-            		//printf("%s\n", tupla[j]);
+
             		abreTabela(tupla[j], &objeto1, &esquema1);
 
             		tp_table *tab3 = (tp_table *)malloc(sizeof(struct tp_table));
 				    tab3 = procuraAtributoFK(objeto1);
-
-				    FILE *dicionario1;
-
-				    if((dicionario1 = fopen("fs_object.dat","a+b")) == NULL)
-				        return ERRO_ABRIR_ARQUIVO;
-
-				    k=0;
-				    while(fgetc (dicionario1) != EOF){
-				        fseek(dicionario1, -1, 1);
-
-				        fread(tupla[k], sizeof(char), TAMANHO_NOME_TABELA , dicionario1);
-				        k++;
-
-				        fseek(dicionario1, 28, 1);
-				    }
-
-				    fclose(dicionario1);
 
 				    for(l=0; l<objeto1.qtdCampos; l++) {
 				    	if(tab3[l].chave == FK) {
@@ -87,12 +66,13 @@ int excluirTabela(char *nomeTabela) {
 				    		}
 				    	}
 				    }
-
+    				free(tab3);
             	}
             }
-            //printf("------------------%s\n", tab2[i].nome);
         }
     }
+
+    free(tab2);
 
     tp_buffer *bufferpoll = initbuffer();
 
